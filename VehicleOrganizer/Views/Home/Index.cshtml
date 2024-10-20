@@ -1,0 +1,32 @@
+﻿@model IEnumerable<VehicleOrganizer.Models.Vehicle>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Vehicles</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td>@vehicle.Make</td>
+                <td>@vehicle.Model</td>
+                <td>@vehicle.Color</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Home", new { id = vehicle.Id })" class="btn btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", "Home", new { id = vehicle.Id })" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
