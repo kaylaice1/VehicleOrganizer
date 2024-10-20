@@ -1,25 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VehicleOrganizer.Models;
 
-public class VehicleDbContext : DbContext
+namespace VehicleOrganizer.Models
 {
-    public VehicleDbContext(DbContextOptions<VehicleDbContext> options) : base(options)
+    public class VehicleDbContext(DbContextOptions<VehicleDbContext> options) : DbContext(options)
     {
-    }
+        public DbSet<Vehicle> Vehicles { get; set; }
 
-    public DbSet<Vehicle> Vehicles { get; set; }
-
-    // Method to seed initial data
-    public static void Seed(VehicleDbContext context)
-    {
-        if (!context.Vehicles.Any())
+        // Method to seed initial data
+        public static void Seed(VehicleDbContext context)
         {
-            context.Vehicles.AddRange(
-                new Vehicle("Toyota", "Camry", "Blue"),
-                new Vehicle("Honda", "Civic", "Red"),
-                new Vehicle("Ford", "F-150", "Black")
-            );
-            context.SaveChanges();
+            if (!context.Vehicles.Any())
+            {
+                context.Vehicles.AddRange(
+                    new Vehicle("Toyota", "Camry", "Blue"),
+                    new Vehicle("Honda", "Civic", "Red"),
+                    new Vehicle("Ford", "F-150", "Black")
+                );
+                context.SaveChanges();
+            }
         }
     }
 }
